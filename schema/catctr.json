@@ -1,0 +1,46 @@
+{
+  "definitions": {
+    "sdk": {
+      "type": "string",
+      "enum": ["dart", "flutter"],
+      "description": "Package SDK"
+    },
+    "script": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of commands to execute"
+    },
+    "package": {
+      "type": "object",
+      "properties": {
+        "sdk": {
+          "$ref": "#/definitions/sdk"
+        },
+        "tasks": {
+          "type": "object",
+          "additionalItems": {
+            "$ref": "#/definitions/script"
+          },
+          "description": "Scripts executable with catctr. If the module script name matches the project script name, both will be executed: first in the module, then in the project"
+        }
+      },
+      "required": ["sdk"]
+    }
+  },
+  "properties": {
+    "project": {
+      "$ref": "#/definitions/package",
+      "properties": {
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/package"
+          }
+        }
+      }
+    }
+  },
+  "required": ["project"]
+}

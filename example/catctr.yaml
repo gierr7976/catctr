@@ -1,0 +1,12 @@
+project:
+  sdk: dart
+  tasks:
+    build:
+      - flutter pub run build_runner build --delete-conflicting-outputs
+
+  packages:
+    someModule:
+      sdk: dart
+      tasks:
+        build:
+          - flutter pub run build_runner build --delete-conflicting-outputs
